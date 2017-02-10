@@ -142,7 +142,7 @@ public class Cliente extends Usuario {
  */
     @Override
     public String toString() {
-        return "Cliente{" + "NIF=" + NIF + ", Nombre=" + Nombre + ", Apellidos=" + Apellidos + ", Edad=" + Edad + ", Telefono=" + Telefono + '}';
+        return "Cliente{" + "NIF=" + NIF +", Password=" + Password + ", Nombre=" + Nombre + ", Apellidos=" + Apellidos + ", Edad=" + Edad + ", Telefono=" + Telefono+'}';
     }
     
     /**

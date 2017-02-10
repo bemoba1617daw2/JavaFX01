@@ -26,7 +26,7 @@
           <Menu fx:id="inicio" mnemonicParsing="false" text="Inicio" />
             <Menu fx:id="transacciones" mnemonicParsing="false" text="Transacciones">
                <items>
-                  <MenuItem fx:id="sacar" mnemonicParsing="false" text="Sacar" />
+                  <MenuItem fx:id="ingresar" mnemonicParsing="false" text="Ingresar" />
                   <MenuItem fx:id="retirar" mnemonicParsing="false" text="Retirar" />
                </items>
             </Menu>
@@ -47,7 +47,7 @@
          <children>
             <TextField fx:id="cantidad" prefHeight="25.0" prefWidth="148.0" GridPane.columnIndex="1" />
             <Label prefHeight="26.0" prefWidth="75.0" text="Ingresar" />
-            <Button fx:id="Ingresar" mnemonicParsing="false" text="Ingresar" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="IngresarDinero" mnemonicParsing="false" text="Ingresar" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </children>

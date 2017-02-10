@@ -39,6 +39,12 @@ public class Login extends Application {
        Cuenta c1 =  new Cuenta(123456789,true, 2011,1313,"12345678A" );
        Cuenta c2 = new Cuenta( 987654321, true, 2011, 1313,"87654321B" );
        Cuenta c3 = new Cuenta( 123123123, true, 2011, 1313, "10234567C");
+       Cliente.cuentas.add(c1);
+       Cliente.cuentas.add(c2);
+       Cliente.cuentas.add(c3);
+       c1.setIBAN("ES"+2011+1313+43+123456789);
+       c2.setIBAN("ES"+2011+1313+34+987654321);
+       c3.setIBAN("ES"+2011+1313+57+123123123);
       launch(args);  
   }
   

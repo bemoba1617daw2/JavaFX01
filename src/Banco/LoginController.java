@@ -39,9 +39,9 @@ public void initManager(final administrarLogin admLogin) {
     loginButton.setOnAction((ActionEvent event) -> {
         boolean sessionID1 = autorizar();
         String sessionID2 = generateSessionID();
-        if (sessionID1 != true) {
+        if (sessionID1 == false) {
                admLogin.autentificacion(sessionID2);
-        }else{
+        }else if(sessionID1 == true){
             messageLoginFx.setText("Usuario o Contraseña Incorrectos!");
         }
             //messageLoginFx.setText("Usuario o Contraseña Incorrectos!");
@@ -51,8 +51,8 @@ public void initManager(final administrarLogin admLogin) {
 
 private boolean autorizar() {
     boolean noexisteusuario=true;
-    for(int z=0;z<Cliente.cuentas.size();z++) {
-       if(Cuenta.clientes.get(z).getNIF().equals(user.getText()) && Cuenta.clientes.get(z).Password.equals(password.getText())){
+    for(int z=0;z<Cuenta.clientes.size();z++) {
+       if(Cuenta.clientes.get(z).getNIF().equals(user.getText()) && Cuenta.clientes.get(z).getPassword().equals(password.getText())){
            noexisteusuario=false;
        }else{
            noexisteusuario=true;

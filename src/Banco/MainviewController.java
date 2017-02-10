@@ -26,8 +26,8 @@ public class MainviewController implements Initializable {
       @FXML private Button logoutButton;
       @FXML private Label  sessionLabel;  
       @FXML private TextField cantidad;
-      @FXML private Button Ingresar;
-      @FXML private MenuItem Sacar;
+      @FXML private Button IngresarDinero;
+      @FXML private MenuItem Ingresar;
        @FXML private GridPane gridIngresar;
        
 //       gridIngresar.opacity(0.0);
@@ -42,20 +42,23 @@ public class MainviewController implements Initializable {
     }  
     
      public void initSessionID(final administrarLogin loginManager, String sessionID) {
+//    gridIngresar.setVisible(false);
     sessionLabel.setText("Bienvenido " + sessionID);
     logoutButton.setOnAction((ActionEvent event) -> {
         loginManager.logout();
     });
-    Ingresar.setOnAction((ActionEvent event) -> {
-        loginManager.logout();
+    IngresarDinero.setOnAction((ActionEvent event) -> {
+        for(int z=0;z<Cliente.cuentas.size();z++) {
+                 if(Cliente.cuentas.get(z).getNIF().equals(sessionID)){
+                       Cliente.cuentas.get(z).Ingresar(Float.parseFloat(cantidad.getText()));
+                       System.out.println("Actualizacion estado de la cuenta: "+Cliente.cuentas.get(z).getNumerocuenta());
+                        System.out.println("Su saldo actual es de : "+Cliente.cuentas.get(z).getSaldo()); 
+                 }
+        }
+
     });
   }
      
-     public void transacciones(){
-         
-         Sacar.setOnAction((ActionEvent event) -> {
-            
-    });
-     }
+  
     
 }
