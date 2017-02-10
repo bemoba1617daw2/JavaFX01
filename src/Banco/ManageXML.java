@@ -77,7 +77,7 @@ public class ManageXML {
                 
                 Document nodeDocument = docBuilder.parse(clients);
                 Element elementArrel = nodeDocument.getDocumentElement();
- 
+                
 		Element cliente = nodeDocument.createElement("Cliente");
 		elementArrel.appendChild(cliente);
  
@@ -130,17 +130,17 @@ public class ManageXML {
 	  
 	}
 
-	/*public static void main(String argv[]) {
-              Cliente cliente1 = new Cliente("Bernat","Montoro",23,635486846,"47926215B","admin123");
-              Cliente cliente2 = new Cliente("Joan","Claver",23,635486846,"47926215B","admin123");
-              Cliente cliente3 = new Cliente("Robert","Andrea",23,635486846,"47926215B","admin123");
-              ArrayList<Cliente> Clientes = new ArrayList();
-              
-              cargaDatosXML("clients.xml",Clientes);
-              for (Cliente client : Clientes){
-                System.out.println(client);
-              } 	  
-	} */
+//	public static void main(String argv[]) {
+//              Cliente cliente1 = new Cliente("Bernat","Montoro",23,635486846,"47926215B","admin123");
+//              Cliente cliente2 = new Cliente("Joan","Claver",23,635486846,"47926215B","admin123");
+//              Cliente cliente3 = new Cliente("Robert","Andrea",23,635486846,"47926215B","admin123");
+//              ArrayList<Cliente> Clientes = new ArrayList();
+//              
+//              cargaDatosXML("clients.xml",Clientes);
+//              for (Cliente client : Clientes){
+//                System.out.println(client);
+//              } 	  
+//	} 
         private static String obtenirContingut(String etiqueta, Element element) {
         NodeList nodes = element.getElementsByTagName(etiqueta).item(0).getChildNodes();
         Node node = (Node) nodes.item(0);
