@@ -54,6 +54,7 @@ private boolean autorizar() {
     for(int z=0;z<Cuenta.clientes.size();z++) {
        if(Cuenta.clientes.get(z).getNIF().equals(user.getText()) && Cuenta.clientes.get(z).getPassword().equals(password.getText())){
            noexisteusuario=false;
+           break;
        }else{
            noexisteusuario=true;
        }

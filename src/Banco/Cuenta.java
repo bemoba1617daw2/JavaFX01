@@ -117,6 +117,10 @@ public class Cuenta implements Comparable<Cuenta> {
         this.Saldo = Saldo;
     }
     
+     public void Retirar(double cantidad) {
+        setSaldo(Saldo-=cantidad);
+    }
+    
     /** 
      * Método que permite ingresar dinero a tu cuenta
     * @param cantidad el dinero que se quiere ingresar

@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -25,11 +26,15 @@ import javafx.scene.layout.GridPane;
 public class MainviewController implements Initializable {
       @FXML private Button logoutButton;
       @FXML private Label  sessionLabel;  
-      @FXML private TextField cantidad;
-      @FXML private Button IngresarDinero;
+      @FXML private TextField cantidadIngresar;
+      @FXML private TextField cantidadRetirar;
+      @FXML private Button ingresarDinero;
+      @FXML private Button retirarDinero;
       @FXML private MenuItem Ingresar;
-       @FXML private GridPane gridIngresar;
-       
+      @FXML private GridPane gridIngresar;
+      @FXML private Label  saldoIngresar;  
+      @FXML private Label  saldoRetirar; 
+      @FXML private Menu inicio; 
 //       gridIngresar.opacity(0.0);
     /**
      * Initializes the controller class.
@@ -42,21 +47,40 @@ public class MainviewController implements Initializable {
     }  
     
      public void initSessionID(final administrarLogin loginManager, String sessionID) {
-//    gridIngresar.setVisible(false);
+   gridIngresar.setVisible(false);
     sessionLabel.setText("Bienvenido " + sessionID);
     logoutButton.setOnAction((ActionEvent event) -> {
         loginManager.logout();
     });
-    IngresarDinero.setOnAction((ActionEvent event) -> {
+    ingresarDinero.setOnAction((ActionEvent event) -> {
         for(int z=0;z<Cliente.cuentas.size();z++) {
                  if(Cliente.cuentas.get(z).getNIF().equals(sessionID)){
-                       Cliente.cuentas.get(z).Ingresar(Float.parseFloat(cantidad.getText()));
+                       Cliente.cuentas.get(z).Ingresar(Float.parseFloat(cantidadIngresar.getText()));
                        System.out.println("Actualizacion estado de la cuenta: "+Cliente.cuentas.get(z).getNumerocuenta());
-                        System.out.println("Su saldo actual es de : "+Cliente.cuentas.get(z).getSaldo()); 
+                        System.out.println("Su saldo actual es de : "+Cliente.cuentas.get(z).getSaldo());
+                        DetallesOperaciones detalles = new DetallesOperaciones(sessionID,Cliente.cuentas.get(z).getNumerocuenta(),Float.parseFloat(cantidadIngresar.getText()),Cliente.cuentas.get(z).VerSaldo(),"Ingresar", Fecha.getFechaActual());
+                        DetallesOperaciones.detalles.add(detalles);
+                        saldoIngresar.setText("Su saldo actual es de: "+Cliente.cuentas.get(z).getSaldo());
                  }
         }
 
     });
+    
+//    retirarDinero.setOnAction((ActionEvent event) -> {
+//          for(int z=0;z<Cliente.cuentas.size();z++) {
+//                 if(Cliente.cuentas.get(z).getNIF().equals(sessionID)){
+//                       Cliente.cuentas.get(z).Retirar(Float.parseFloat(cantidadRetirar.getText()));
+//                       System.out.println("Actualizacion estado de la cuenta: "+Cliente.cuentas.get(z).getNumerocuenta());
+//                        System.out.println("Su saldo actual es de : "+Cliente.cuentas.get(z).getSaldo());
+//                        DetallesOperaciones detalles = new DetallesOperaciones(sessionID,Cliente.cuentas.get(z).getNumerocuenta(),Float.parseFloat(cantidadRetirar.getText()),Cliente.cuentas.get(z).VerSaldo(),"Retirar", Fecha.getFechaActual());
+//                        DetallesOperaciones.detalles.add(detalles);
+//                        saldoRetirar.setText("Su saldo actual es de: "+Cliente.cuentas.get(z).getSaldo());
+//                 }
+//        }
+//    });
+     retirarDinero.setOnAction((ActionEvent event) -> {
+            gridIngresar.setVisible(true);
+     });
   }
      
   
