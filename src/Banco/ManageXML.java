@@ -68,7 +68,7 @@ public class ManageXML {
                 String edadXML = Integer.toString(Client.getEdad());
                 String telefonoXML = Integer.toString(Client.getTelefono());
                 String NIFXML = Client.getNIF();
-                String passwordXML = Client.getNIF();
+                String passwordXML = Client.getPassword();
          
                               
                 File clients = new File ("clients.xml");

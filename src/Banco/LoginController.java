@@ -37,10 +37,11 @@ public class LoginController implements Initializable {
 
 public void initManager(final administrarLogin admLogin) {
     loginButton.setOnAction((ActionEvent event) -> {
-        String sessionID1 = autorizar();
-        if (sessionID1 != null) {
-            admLogin.autentificacion(sessionID1);
-        }else if(sessionID1 == null){
+        boolean sessionID1 = autorizar();
+        String sessionID2 = generateSessionID();
+        if (sessionID1 != true) {
+               admLogin.autentificacion(sessionID2);
+        }else{
             messageLoginFx.setText("Usuario o Contraseña Incorrectos!");
         }
             //messageLoginFx.setText("Usuario o Contraseña Incorrectos!");
@@ -48,18 +49,30 @@ public void initManager(final administrarLogin admLogin) {
     });
   }
 
-private String autorizar() {
-    return 
-      "clot".equals(user.getText()) && "123".equals(password.getText()) 
-            ? generateSessionID() 
-            : null;
-  }
+private boolean autorizar() {
+    boolean noexisteusuario=true;
+    for(int z=0;z<Cliente.cuentas.size();z++) {
+       if(Cuenta.clientes.get(z).getNIF().equals(user.getText()) && Cuenta.clientes.get(z).Password.equals(password.getText())){
+           noexisteusuario=false;
+       }else{
+           noexisteusuario=true;
+       }
+    }
+     return noexisteusuario;
+}
+    
+    
+//    return 
+//      "clot".equals(user.getText()) && "123".equals(password.getText()) 
+//            ? generateSessionID() 
+//            : null;
   
-  private static int sessionID = 0;
+  
+//  private static int sessionID = 0;
 
   private String generateSessionID() {
-    sessionID++;
-    return (user.getText()) + (password.getText()) + sessionID;
+//    sessionID++;
+    return (user.getText());
   }
     
 }
