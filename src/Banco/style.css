@@ -9,3 +9,7 @@
 #loginButton:hover{
     -fx-cursor: hand;
 }
+
+Tab:hover{
+    -fx-cursor: hand;
+}
