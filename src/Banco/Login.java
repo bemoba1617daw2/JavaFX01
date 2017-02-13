@@ -6,6 +6,8 @@
 package Banco;
 
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.Map;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.scene.Scene;
@@ -26,11 +28,11 @@ public class Login extends Application {
       Cliente cliente2 = new Cliente("Laura","Bujalance",19,623458746,"87654321B","clot1");
       Cliente cliente3 = new Cliente("Sergio","Martinez",22,675678555,"10234567C","clot2");
       //los añadimos al xml
-      ManageXML.actualitzarXML(cliente1);
-      ManageXML.actualitzarXML(cliente2);
-      ManageXML.actualitzarXML(cliente3);
+      ManageXML.actualitzarXMLCliente(cliente1);
+      ManageXML.actualitzarXMLCliente(cliente2);
+      ManageXML.actualitzarXMLCliente(cliente3);
       //leemos los clientes del archivo y los añadimos al array Cuenta.clientes
-      ManageXML.cargaDatosXML("clients.xml",Cuenta.clientes);
+      ManageXML.cargaDatosXMLCliente("clients.xml",Cuenta.clientes);
       //for (Cliente client : Cuenta.clientes)
             Cuenta.clientes.forEach((client) -> {
                 System.out.println(client);
@@ -45,6 +47,17 @@ public class Login extends Application {
        c1.setIBAN("ES"+2011+1313+43+123456789);
        c2.setIBAN("ES"+2011+1313+34+987654321);
        c3.setIBAN("ES"+2011+1313+57+123123123);
+       
+       
+       Empleado empleado1 = new Empleado("123","MarcLopez","19996782C","clot");
+       ManageXML.actualitzarXMLEmpleado(empleado1);
+        ManageXML.cargaDatosXMLEmpleado("empleats.xml",Empleado.empleado);
+//     Iterator it = Empleado.empleado.entrySet().iterator();
+//        while (it.hasNext()) {
+//         Map.Entry e = (Map.Entry)it.next();
+//         System.out.println("hashmap");
+//           System.out.println(e.getKey() + " " + e.getValue());
+//}
       launch(args);  
   }
   

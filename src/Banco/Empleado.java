@@ -7,6 +7,9 @@ import java.util.*;
  */
 public class Empleado extends Usuario{
     
+    static HashMap empleado= new HashMap();  
+   // static ArrayList <Empleado> empleado = new ArrayList<Empleado>();
+    
     private String CodiEmpleado;
     private String Username;
     
@@ -35,6 +38,10 @@ public class Empleado extends Usuario{
     @Override
     public String toString() {
         return "Empleado{" + "CodiEmpleado=" + CodiEmpleado + ", Username=" + Username + '}';
+    }
+
+    void put(String nombreXML, String passwordXML) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
        
 }

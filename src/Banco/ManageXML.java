@@ -27,7 +27,7 @@ import org.xml.sax.SAXException;
  * @version 1.0 11/02/2014
  */ 
 public class ManageXML {
-           public static void cargaDatosXML(String cadena, ArrayList<Cliente> array){ 
+           public static void cargaDatosXMLCliente(String cadena, ArrayList<Cliente> array){ 
                // esta funcion instancia objetos de los clientes que estan en el XML
                // el parametro cadena es el nombre del fichero del qual se quiere leer
                try {
@@ -60,7 +60,7 @@ public class ManageXML {
         }
     
            }
-           public static void actualitzarXML(Cliente Client) {
+           public static void actualitzarXMLCliente(Cliente Client) {
                         try {
                             // esta funcion añade un cliente al xml
                 String nombreXML = Client.getNombre();
@@ -129,7 +129,38 @@ public class ManageXML {
           
 	  
 	}
+            
+          public static void cargaDatosXMLEmpleado(String cadena, HashMap empleado){ 
+               // esta funcion instancia objetos de los clientes que estan en el XML
+               // el parametro cadena es el nombre del fichero del qual se quiere leer
+               try {
+            File fichero = new File(cadena);
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(fichero);
+            doc.getDocumentElement().normalize();
 
+            NodeList nodes = doc.getElementsByTagName("Empleado");
+
+            for (int i = 0; i < nodes.getLength(); i++) {
+                Node node = nodes.item(i);
+                if (node.getNodeType() == Node.ELEMENT_NODE) {
+                    Element element = (Element) node;
+                    String codiXML = (obtenirContingut("CodiEmpleado", element));
+                    String nombreXML = obtenirContingut("Username", element);
+                    String nifXML = (obtenirContingut("NIF", element));
+                    String passwordXML = obtenirContingut("Password", element);
+//                    Cliente client = new Cliente(nombreXML, apellidosXML, edadXML, telefonoXML, NIFXML, passwordXML);
+                     Empleado empleat = new Empleado(codiXML,nombreXML,nifXML,passwordXML);
+                     empleat.put(nombreXML,passwordXML);                        
+                    
+                }
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    
+           }
 //	public static void main(String argv[]) {
 //              Cliente cliente1 = new Cliente("Bernat","Montoro",23,635486846,"47926215B","admin123");
 //              Cliente cliente2 = new Cliente("Joan","Claver",23,635486846,"47926215B","admin123");
@@ -141,6 +172,66 @@ public class ManageXML {
 //                System.out.println(client);
 //              } 	  
 //	} 
+        
+                public static void actualitzarXMLEmpleado(Empleado Empleat) {
+                        try {
+                            // esta funcion añade un cliente al xml
+                String codiXML = Empleat.getCodiEmpleado();
+                String nombreXML = Empleat.getUsername();
+                String NIFXML = Empleat.getNIF();
+                String passwordXML = Empleat.getPassword();
+         
+                              
+                File empleats = new File ("empleats.xml");
+		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+                
+                Document nodeDocument = docBuilder.parse(empleats);
+                Element elementArrel = nodeDocument.getDocumentElement();
+                
+		Element cliente = nodeDocument.createElement("Empleado");
+		elementArrel.appendChild(cliente);
+ 
+		Element nombre = nodeDocument.createElement("CodiEmpleado");
+		nombre.appendChild(nodeDocument.createTextNode(codiXML));
+		cliente.appendChild(nombre);
+ 
+		Element apellidos = nodeDocument.createElement("Username");
+		apellidos.appendChild(nodeDocument.createTextNode(nombreXML));
+		cliente.appendChild(apellidos);
+                
+                Element edad = nodeDocument.createElement("NIF");
+		edad.appendChild(nodeDocument.createTextNode(NIFXML));
+		cliente.appendChild(edad);
+                
+                Element telefono = nodeDocument.createElement("Password");
+		telefono.appendChild(nodeDocument.createTextNode(passwordXML));
+		cliente.appendChild(telefono);
+ 
+		
+		TransformerFactory transformerFactory = TransformerFactory.newInstance();
+		Transformer transformer = transformerFactory.newTransformer();
+		DOMSource origen = new DOMSource(nodeDocument);
+		StreamResult sortidaXML = new StreamResult(new File("empleats.xml"));
+ 
+		
+		transformer.transform(origen, sortidaXML);
+ 
+		System.out.println("Desat!");
+ 
+	  } catch (ParserConfigurationException pce) {
+		pce.printStackTrace();
+	  } catch (TransformerException tfe) {
+		tfe.printStackTrace();
+	  } catch (SAXException ex) {
+                Logger.getLogger(ManageXML.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(ManageXML.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+          
+	  
+	}
         private static String obtenirContingut(String etiqueta, Element element) {
         NodeList nodes = element.getElementsByTagName(etiqueta).item(0).getChildNodes();
         Node node = (Node) nodes.item(0);
